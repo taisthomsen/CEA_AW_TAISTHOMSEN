@@ -1,0 +1,4 @@
+The naming convention for dbt models is {layer}_{source_name}__{model_name}. Where layer can be intermediate, marts or staging. And source_name is the source name.
+
+In addition, the models folder is also structured as the following:
+ - models/layer/source_name/model_file.sql
