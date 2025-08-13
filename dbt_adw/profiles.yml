@@ -1,0 +1,42 @@
+adventure_works:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: your_snowflake_account
+      user: your_username
+      password: your_password
+      role: your_role
+      database: adventure_works
+      warehouse: your_warehouse
+      schema: dbt_dev
+      threads: 4
+      client_session_keep_alive: False
+      query_tag: adventure_works_dbt
+    
+    prod:
+      type: snowflake
+      account: your_snowflake_account
+      user: your_username
+      password: your_password
+      role: your_role
+      database: adventure_works
+      warehouse: your_warehouse
+      schema: dbt_prod
+      threads: 8
+      client_session_keep_alive: False
+      query_tag: adventure_works_dbt
+
+# Alternative: PostgreSQL connection
+# adventure_works:
+#   target: dev
+#   outputs:
+#     dev:
+#       type: postgres
+#       host: localhost
+#       user: your_username
+#       password: your_password
+#       port: 5432
+#       dbname: adventure_works
+#       schema: dbt_dev
+#       threads: 4
