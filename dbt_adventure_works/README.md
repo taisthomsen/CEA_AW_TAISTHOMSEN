@@ -4,7 +4,7 @@ This dbt project implements a modern analytics stack for Adventure Works, a bicy
 
 ## Project Overview
 
-Adventure Works has over 500 distinct products, 20,000 customers, and 31,000 orders. This project creates a data warehouse to support sales performance analysis and business intelligence.
+Adventure Works has over 500 distinct products, 20,000 customers, and 31,000 orders. This project contains the transformations to set up a data warehouse to support sales performance analysis and business intelligence.
 
 ## Project Structure
 
@@ -79,7 +79,8 @@ As per the data dictionary:
 - Access to Adventure Works database
 - Snowflake account (recommended)
 
-### Installation
+### Getting started
+
 1. Clone this repository
 1. Install dbt: `pip install -r requirements.txt`
 1. Copy the [`.env.example`](.env.example) file as a `.env` file and fill it out
@@ -90,8 +91,8 @@ As per the data dictionary:
 
 ### Running the Project
 ```bash
-# Build all models
-dbt run
+# Build all models while executing tests
+dbt build
 
 # Run tests
 dbt test
@@ -99,10 +100,6 @@ dbt test
 # Generate documentation
 dbt docs generate
 dbt docs serve
-
-# Run specific models
-dbt run --select staging
-dbt run --select marts
 ```
 
 ## Testing Strategy
@@ -130,13 +127,3 @@ The project includes comprehensive testing to ensure:
 - Business rule compliance
 - Data freshness and completeness
 
-## Contributing
-
-1. Follow the naming convention: `layer_source__model_name`
-2. Include comprehensive documentation
-3. Add appropriate tests for all models
-4. Follow dbt best practices
-
-## License
-
-This project is part of the Adventure Works Analytics Engineering certification.
