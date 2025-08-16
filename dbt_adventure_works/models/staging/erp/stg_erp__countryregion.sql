@@ -5,17 +5,16 @@
 }}
 
 with source as (
-    select * from {{ source('erp', 'salesreason') }}
+    select * from {{ source('erp', 'countryregions') }}
 ),
 
 renamed as (
     select
         -- Primary Key
-        salesreasonid as sales_reason_id,
+        countryregioncode as country_region_code,
         
-        -- Sales Reason Information
-        name as reason_name,
-        reasontype as reason_type,
+        -- Country/Region Information
+        name as country_region_name,
         modifieddate as modified_date
         
     from source

@@ -5,7 +5,7 @@
 }}
 
 with source as (
-    select * from {{ source('erp', 'person') }}
+    select * from {{ source('erp', 'persons') }}
 ),
 
 renamed as (

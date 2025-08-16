@@ -81,10 +81,12 @@ As per the data dictionary:
 
 ### Installation
 1. Clone this repository
-2. Install dbt: `pip install dbt-core`
-3. Configure your profile in `~/.dbt/profiles.yml`
-4. Run `dbt deps` to install dependencies
-5. Run `dbt run` to build all models
+1. Install dbt: `pip install -r requirements.txt`
+1. Copy the [`.env.example`](.env.example) file as a `.env` file and fill it out
+1. Run `source .env` to load the variables
+1. Run `dbt deps` to install dependencies
+1. Run `dbt debug` to ensure everything is working
+1. Run `dbt run` to build all models
 
 ### Running the Project
 ```bash

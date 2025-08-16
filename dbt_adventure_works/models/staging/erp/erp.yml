@@ -1,0 +1,164 @@
+version: 2
+
+sources:
+  - name: erp
+    description: "Adventure Works ERP system data (SAP)"
+    schema: "RAW_ADVENTURE_WORKS"  # Source schema - read-only, shared
+    tables:
+      - name: persons
+        identifier: person_person
+        description: "Person information (customers and employees)"
+        columns:
+          - name: businessentityid
+            description: "Primary key for person"
+            tests:
+              - unique
+              - not_null
+          - name: persontype
+            description: "Type of person (EM, SP, SC, VC, IN, GC)"
+            tests:
+              - not_null
+      - name: customers
+        identifier: sales_customer
+        description: "CRM customer information"
+        columns:
+          - name: customerid
+            description: "Primary key for customer"
+            tests:
+              - unique
+              - not_null
+      - name: salesreasons
+        identifier: sales_salesreason
+        description: "Sales reason codes"
+        columns:
+          - name: salesreasonid
+            description: "Primary key for sales reason"
+            tests:
+              - unique
+              - not_null
+      - name: salespersons
+        identifier: sales_salesperson
+        description: "Salesperson information"
+        columns:
+          - name: businessentityid
+            description: "Primary key for salesperson"
+            tests:
+              - unique
+              - not_null
+      - name: employees
+        identifier: human_resources_employee
+        description: "Employee information"
+        columns:
+          - name: businessentityid
+            description: "Primary key for employee"
+            tests:
+              - unique
+              - not_null
+      - name: stateprovinces
+        identifier: person_stateprovince
+        description: "State and province information"
+        columns:
+          - name: stateprovinceid
+            description: "Primary key for state/province"
+            tests:
+              - unique
+              - not_null
+      - name: addresses
+        identifier: person_address
+        description: "Address information"
+        columns:
+          - name: addressid
+            description: "Primary key for address"
+            tests:
+              - unique
+              - not_null
+          - name: addressline1
+            description: "First address line"
+            tests:
+              - not_null
+          - name: addressline2
+            description: "Second address line"
+          - name: city
+            description: "City name"
+            tests:
+              - not_null
+          - name: postalcode
+            description: "Postal code"
+          - name: spatiallocation
+            description: "Spatial location data"
+      - name: countryregions
+        identifier: person_countryregion
+        description: "Country and region information"
+        columns:
+          - name: countryregioncode
+            description: "Primary key for country/region"
+            tests:
+              - unique
+              - not_null
+          - name: name
+            description: "Country/region name"
+            tests:
+              - not_null
+      - name: salesorderheaders
+        identifier: sales_salesorderheader
+        description: "Sales order header information"
+        columns:
+          - name: salesorderid 
+            description: "Primary key for sales order"
+            tests:
+              - unique
+              - not_null
+          - name: orderdate
+            description: "Date when order was placed"
+            tests:
+              - not_null
+          - name: customerid
+            description: "Foreign key to customer"
+            tests:
+              - not_null
+          - name: salespersonid
+            description: "Foreign key to salesperson"
+          - name: billtoaddressid
+            description: "Billing address ID"
+          - name: shiptoaddressid
+            description: "Shipping address ID"
+      - name: salesorderdetails
+        identifier: sales_salesorderdetail
+        description: "Sales order line items"
+        columns:
+          - name: salesorderid
+            description: "Foreign key to sales order header"
+            tests:
+              - not_null
+          - name: salesorderdetailid
+            description: "Primary key for order detail"
+            tests:
+              - unique
+              - not_null
+      - name: products
+        identifier: production_product
+        description: "Product catalog information"
+        columns:
+          - name: productid
+            description: "Primary key for product"
+            tests:
+              - unique
+              - not_null
+          - name: name
+            description: "Product name"
+            tests:
+              - not_null
+          - name: productnumber
+            description: "Product number"
+            tests:
+              - unique
+              - not_null
+          - name: color
+            description: "Product color"
+          - name: size
+            description: "Product size"
+          - name: weight
+            description: "Product weight"
+
+
+   

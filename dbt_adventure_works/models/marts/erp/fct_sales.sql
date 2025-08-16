@@ -64,12 +64,11 @@ sales_joined as (
         sod.order_qty,
         sod.unit_price,
         sod.unit_price_discount,
-        sod.discount,
         
         -- Calculated Metrics
         sod.order_qty as quantity_purchased,
         sod.unit_price * sod.order_qty as total_amount,
-        sod.unit_price * sod.order_qty * (1 - coalesce(sod.discount, 0)) as net_amount,
+        sod.unit_price * sod.order_qty * (1 - coalesce(sod.unit_price_discount, 0)) as net_amount,
         
         -- Header Level Metrics
         soh.subtotal,
@@ -122,7 +121,6 @@ final as (
         order_qty,
         unit_price,
         unit_price_discount,
-        discount,
         
         -- Key Metrics (as per data dictionary)
         quantity_purchased,

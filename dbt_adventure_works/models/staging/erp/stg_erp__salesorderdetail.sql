@@ -5,7 +5,7 @@
 }}
 
 with source as (
-    select * from {{ source('erp', 'salesorderdetail') }}
+    select * from {{ source('erp', 'salesorderdetails') }}
 ),
 
 renamed as (
@@ -22,8 +22,6 @@ renamed as (
         orderqty as order_qty,
         unitprice as unit_price,
         unitpricediscount as unit_price_discount,
-        discount,
-        line_total,
         rowguid,
         modifieddate as modified_date
         
