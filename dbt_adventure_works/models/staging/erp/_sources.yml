@@ -3,11 +3,11 @@ version: 2
 sources:
   - name: erp
     description: "Adventure Works ERP system data (SAP)"
-    schema: "RAW_ADVENTURE_WORKS"  # Source schema - read-only, shared
+    schema: "raw_adventure_works"
     tables:
       - name: persons
         identifier: person_person
-        description: "Person information (customers and employees)"
+        description: "Nomalized data. Has information over persons (which can be customers, employees, etc.)"
         columns:
           - name: businessentityid
             description: "Primary key for person"
@@ -15,9 +15,16 @@ sources:
               - unique
               - not_null
           - name: persontype
-            description: "Type of person (EM, SP, SC, VC, IN, GC)"
+            description: "Type of person (EM, SP, SC, VC, IN, GC). EM = Employee, SP = Sales Person, SC = Store Contact, VC = Vendor Contact, IN = Individual (customer), GC = General Contact"
             tests:
               - not_null
+              - accepted_values:
+                - EM
+                - SP
+                - SC
+                - VC
+                - IN
+                - GC
       - name: customers
         identifier: sales_customer
         description: "CRM customer information"
