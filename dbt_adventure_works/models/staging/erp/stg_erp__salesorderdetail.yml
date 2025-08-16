@@ -1,0 +1,22 @@
+models:
+  - name: stg_erp__salesorderdetail
+    description: "Staging model for sales order details from the ERP system. Contains line item details for sales orders."
+    columns:
+      - name: sales_order_detail_id
+        description: "Unique identifier for the sales order detail."
+      - name: sales_order_id
+        description: "Identifier for the sales order."
+      - name: product_id
+        description: "Identifier for the product."
+      - name: special_offer_id
+        description: "Identifier for the special offer."
+      - name: order_qty
+        description: "Quantity ordered for the line item."
+      - name: unit_price
+        description: "Unit price for the product."
+      - name: unit_price_discount
+        description: "Discount applied to the unit price."
+      - name: rowguid
+        description: "Unique row identifier (GUID)."
+      - name: modified_date
+        description: "Date the record was last modified."

@@ -1,0 +1,32 @@
+models:
+  - name: dim_location
+    description: "Dimension table for locations. Contains address, city, state, and country information."
+    columns:
+      - name: location_key
+        description: "Unique surrogate key for the location."
+      - name: city
+        description: "City of the location."
+      - name: state_province
+        description: "State or province of the location."
+      - name: country_region
+        description: "Country or region of the location."
+      - name: state_province_code
+        description: "Code for the state or province."
+      - name: country_region_code
+        description: "Code for the country or region."
+      - name: postal_code
+        description: "Postal code for the location."
+      - name: address_line_1
+        description: "First line of the address."
+      - name: address_line_2
+        description: "Second line of the address (optional)."
+      - name: spatial_location
+        description: "Spatial location data."
+      - name: rowguid
+        description: "Unique row identifier (GUID)."
+      - name: modified_date
+        description: "Date the record was last modified."
+      - name: dbt_updated_at
+        description: "Timestamp when the record was last updated by dbt."
+      - name: dbt_run_id
+        description: "ID of the dbt run that last updated the record."

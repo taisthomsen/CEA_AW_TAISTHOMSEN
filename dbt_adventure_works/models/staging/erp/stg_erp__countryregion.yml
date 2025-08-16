@@ -1,0 +1,10 @@
+models:
+  - name: stg_erp__countryregion
+    description: "Staging model for country/region data from the ERP system. Contains country/region codes and names."
+    columns:
+      - name: country_region_code
+        description: "Unique code for the country or region."
+      - name: country_region_name
+        description: "Name of the country or region."
+      - name: modified_date
+        description: "Date the record was last modified."
