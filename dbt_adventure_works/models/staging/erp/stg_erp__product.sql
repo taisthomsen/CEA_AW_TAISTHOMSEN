@@ -1,45 +1,31 @@
-{{
-  config(
-    materialized='view'
-  )
-}}
 
-with source as (
-    select * from {{ source('erp', 'products') }}
-),
+with 
+    source as (
+        select * from {{ source('erp', 'products') }}
+    )
 
-renamed as (
+    , renamed as (
     select
         -- Primary Key
-        productid as product_id,
-        
-        -- Product Information
-        name as product_name,
-        productnumber as product_number,
-        makeflag as make_flag,
-        finishedgoodsflag as finished_goods_flag,
-        color,
-        safetystocklevel as safety_stock_level,
-        reorderpoint as reorder_point,
-        standardcost as standard_cost,
-        listprice as list_price,
-        size,
-        sizeunitmeasurecode as size_unit_measure_code,
-        weightunitmeasurecode as weight_unit_measure_code,
-        weight,
-        daystomanufacture as days_to_manufacture,
-        productline as product_line,
-        class,
-        style,
-        productsubcategoryid as product_subcategory_id,
-        productmodelid as product_model_id,
-        sellstartdate as sell_start_date,
-        sellenddate as sell_end_date,
-        discontinueddate as discontinued_date,
-        rowguid,
-        modifieddate as modified_date
-        
+        cast(productid as string) as product_id
+        -- Foreign Keys
+        ,cast(productsubcategoryid as string) as product_subcategory_id
+        -- Product Information          
+        ,cast(name as varchar) as product_name
+        ,finishedgoodsflag as finished_goods_flag
+        ,cast(standardcost as numeric) as standard_cost
+        ,cast(listprice as numeric) as unit_price
+        ,cast(productline as varchar) as product_line
+        ,cast(productmodelid as string) as product_model_id
+        , 'size' as product_size
+        ,cast(color as varchar) as product_color
+        ,cast(sellstartdate as date) as sell_start_date
+        ,cast(sellenddate as date) as sell_end_date
+        -- System columns
+        ,cast(rowguid as string) as rowguid
+        ,cast(modifieddate as date) as last_updated_at
     from source
 )
 
-select * from renamed
+select * 
+from renamed

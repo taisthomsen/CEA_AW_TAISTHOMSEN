@@ -16,8 +16,13 @@ clean-targets:
   - "target"
   - "dbt_packages"
 
+vars:
+  start_date: "2011-01-01"
+  end_date: "2015-12-31"
+  
 models:
   adventure_works_dbt:
+    +materialized: ephemeral    
     staging:
       +materialized: view
     intermediate:

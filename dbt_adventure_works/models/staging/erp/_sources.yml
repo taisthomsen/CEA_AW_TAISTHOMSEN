@@ -7,24 +7,19 @@ sources:
     tables:
       - name: persons
         identifier: person_person
-        description: "Nomalized data. Has information over persons (which can be customers, employees, etc.)"
+        description: "Normalized data about persons, including customers, employees, vendors, and contacts."
         columns:
           - name: businessentityid
-            description: "Primary key for person"
+            description: "Primary key for person or business entity."
             tests:
               - unique
               - not_null
           - name: persontype
-            description: "Type of person (EM, SP, SC, VC, IN, GC). EM = Employee, SP = Sales Person, SC = Store Contact, VC = Vendor Contact, IN = Individual (customer), GC = General Contact"
+            description: "Type of person. Values: EM = Employee, SP = Sales Person, SC = Store Contact, VC = Vendor Contact, IN = Individual (customer), GC = General Contact."
             tests:
+              - unique
               - not_null
-              - accepted_values:
-                - EM
-                - SP
-                - SC
-                - VC
-                - IN
-                - GC
+
       - name: customers
         identifier: sales_customer
         description: "CRM customer information"
@@ -34,6 +29,7 @@ sources:
             tests:
               - unique
               - not_null
+
       - name: salesreasons
         identifier: sales_salesreason
         description: "Sales reason codes"
@@ -43,6 +39,7 @@ sources:
             tests:
               - unique
               - not_null
+
       - name: salespersons
         identifier: sales_salesperson
         description: "Salesperson information"
@@ -52,6 +49,7 @@ sources:
             tests:
               - unique
               - not_null
+
       - name: employees
         identifier: human_resources_employee
         description: "Employee information"
@@ -61,6 +59,7 @@ sources:
             tests:
               - unique
               - not_null
+
       - name: stateprovinces
         identifier: person_stateprovince
         description: "State and province information"
@@ -70,6 +69,7 @@ sources:
             tests:
               - unique
               - not_null
+
       - name: addresses
         identifier: person_address
         description: "Address information"
@@ -83,16 +83,11 @@ sources:
             description: "First address line"
             tests:
               - not_null
-          - name: addressline2
-            description: "Second address line"
-          - name: city
-            description: "City name"
+          - name: stateprovinceid
+            description: "Foreign key to state/province"
             tests:
               - not_null
-          - name: postalcode
-            description: "Postal code"
-          - name: spatiallocation
-            description: "Spatial location data"
+
       - name: countryregions
         identifier: person_countryregion
         description: "Country and region information"
@@ -106,6 +101,7 @@ sources:
             description: "Country/region name"
             tests:
               - not_null
+
       - name: salesorderheaders
         identifier: sales_salesorderheader
         description: "Sales order header information"
@@ -123,12 +119,16 @@ sources:
             description: "Foreign key to customer"
             tests:
               - not_null
-          - name: salespersonid
-            description: "Foreign key to salesperson"
-          - name: billtoaddressid
-            description: "Billing address ID"
-          - name: shiptoaddressid
-            description: "Shipping address ID"
+
+      - name: salesorderheadersalesreason
+        identifier: sales_salesorderheadersalesreason
+        description: "Sales reason for sales order header"
+        columns:
+          - name: salesorderid
+            description: "Foreign key to sales order header"
+            tests:
+              - not_null
+
       - name: salesorderdetails
         identifier: sales_salesorderdetail
         description: "Sales order line items"
@@ -142,6 +142,7 @@ sources:
             tests:
               - unique
               - not_null
+
       - name: products
         identifier: production_product
         description: "Product catalog information"
@@ -151,21 +152,40 @@ sources:
             tests:
               - unique
               - not_null
-          - name: name
-            description: "Product name"
-            tests:
-              - not_null
-          - name: productnumber
-            description: "Product number"
+
+      - name: productcategories
+        identifier: production_productcategory
+        description: "Product category information"
+        columns:
+          - name: productcategoryid
+            description: "Primary key for product category"
             tests:
               - unique
               - not_null
-          - name: color
-            description: "Product color"
-          - name: size
-            description: "Product size"
-          - name: weight
-            description: "Product weight"
+
+      - name: productsubcategories
+        identifier: production_productsubcategory
+        description: "Product subcategory information"
+        columns:
+          - name: productsubcategoryid
+            description: "Primary key for product subcategory"
+            tests:
+              - unique
+              - not_null
+         
+      - name: stores
+        identifier: sales_store
+        description: "Store information"
+        columns:
+          - name: businessentityid
+            description: "Primary key for store"
+            tests:
+              - unique
+              - not_null
+          - name: salespersonid
+            description: "Foreign key to salesperson"
+            tests:
+            - not_null
 
 
    

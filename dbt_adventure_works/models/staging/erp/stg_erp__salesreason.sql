@@ -1,24 +1,21 @@
-{{
-  config(
-    materialized='view'
-  )
-}}
 
-with source as (
-    select * from {{ source('erp', 'salesreasons') }}
-),
+  with 
+      source as (
+        select * from {{ source('erp', 'salesreasons') }}
+    )
 
-renamed as (
-    select
-        -- Primary Key
-        salesreasonid as sales_reason_id,
-        
-        -- Sales Reason Information
-        name as reason_name,
-        reasontype as reason_type,
-        modifieddate as modified_date
+    , renamed as (
+        select
+            -- Primary Key
+            cast(salesreasonid as string) as sales_reason_id
+            -- Sales Reason Information
+            ,cast(name as varchar) as sales_reason_name
+            ,cast(reasontype as varchar) as sales_reason_type
+            -- System columns
+            ,cast(modifieddate as date) as last_updated_at
         
     from source
 )
 
-select * from renamed
+select * 
+from renamed

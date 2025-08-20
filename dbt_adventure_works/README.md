@@ -82,7 +82,8 @@ As per the data dictionary:
 ### Getting started
 
 1. Clone this repository
-1. Install dbt: `pip install -r requirements.txt`
+1. Create a python virtual environment (`venv`) and activate it
+1. Install dbt under the venv: `pip install -r requirements.txt`
 1. Copy the [`.env.example`](.env.example) file as a `.env` file and fill it out
 1. Run `source .env` to load the variables
 1. Run `dbt deps` to install dependencies

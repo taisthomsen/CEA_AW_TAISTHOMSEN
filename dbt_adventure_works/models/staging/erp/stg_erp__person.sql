@@ -1,33 +1,27 @@
-{{
-  config(
-    materialized='view'
-  )
-}}
 
-with source as (
-    select * from {{ source('erp', 'persons') }}
-),
+with 
+    source as (
+        select * 
+        from {{ source('erp', 'persons') }}
+    )
 
-renamed as (
-    select
-        -- Primary Key
-        businessentityid as business_entity_id,
-        
-        -- Person Information
-        persontype as person_type,
-        namestyle as name_style,
-        title,
-        firstname as first_name,
-        middlename as middle_name,
-        lastname as last_name,
-        suffix,
-        emailpromotion as email_promotion,
-        additionalcontactinfo as additional_contact_info,
-        demographics,
-        rowguid,
-        modifieddate as modified_date
-        
-    from source
-)
+    , renamed as (
+        select
+            -- Primary Key
+            cast(businessentityid as string) as person_id
+            --Person Information
+            ,cast(persontype as varchar)  as person_type
+            ,namestyle as name_style
+            ,cast(firstname as varchar) as first_name
+            ,cast(middlename as varchar) as middle_name
+            ,cast(lastname as varchar) as last_name
+            ,cast(title as varchar) as title
+            ,cast(emailpromotion as integer) as customer_email_approval
+            -- System columns
+            ,cast(rowguid as string) as rowguid
+            ,cast(modifieddate as date) as last_updated_at  
+            from source
+        )
 
-select * from renamed
+    select * 
+    from renamed

@@ -1,42 +1,36 @@
-{{
-  config(
-    materialized='view'
-  )
-}}
 
-with source as (
-    select * from {{ source('erp', 'salesorderheaders') }}
-),
+with 
+    source as (
+        select * 
+        from {{ source('erp', 'salesorderheaders') }}
+    )
 
-renamed as (
-    select
-        -- Primary Key
-        salesorderid as sales_order_id,
-        
+    , renamed as (
+        select
+            -- Primary Key
+            cast(salesorderid as string) as sales_order_id        
         -- Foreign Keys
-        customerid as customer_id,
-        salespersonid as salesperson_id,
-        billtoaddressid as billing_address_id,
-        shiptoaddressid as shipping_address_id,
-        
+            ,cast(customerid as string) as customer_id
+            ,cast(salespersonid as string) as salesperson_id
+            ,cast (territoryid as string) as territory_id
+            ,cast (creditcardid as string) as credit_card_id
+            ,cast (shiptoaddressid as string) as shipping_address_id
         -- Order Information
-        orderdate as order_date,
-        duedate as due_date,
-        shipdate as ship_date,
-        status,
-        onlineorderflag as is_online_order,
-        purchaseordernumber as purchase_order_number,
-        accountnumber as account_number,
-        creditcardapprovalcode as credit_card_approval_code,
-        subtotal,
-        taxamt as tax_amount,
-        freight,
-        totaldue as total_due,
-        comment,
-        rowguid,
-        modifieddate as modified_date
-        
-    from source
-)
+            ,orderdate as order_date
+            ,duedate as due_date
+            ,shipdate as ship_date
+            ,status as order_status
+            ,cast(onlineorderflag as boolean) as is_online_order  
+            ,cast(subtotal as numeric) as subtotal
+            ,cast(taxamt as numeric) as tax_amount
+            ,cast(freight as numeric) as freight
+            ,cast(totaldue as numeric) as total_due
+            -- System columns
+            ,cast(rowguid as string) as rowguid
+            ,cast(modifieddate as date) as last_updated_at
 
-select * from renamed
+        from source
+    )
+
+    select * 
+    from renamed
