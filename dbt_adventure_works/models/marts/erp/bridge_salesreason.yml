@@ -1,0 +1,10 @@
+models:
+  - name: bridge_salesreason
+    description: "Bridge table for sales and sales reasons."
+    columns:
+      - name: bridge_sales_reason_sk
+        description: "Surrogate key for the bridge table."
+      - name: sales_fk
+        description: "Foreign key for the sales table."
+      - name: sales_reason_fk
+        description: "Foreign key for the sales reasons table."

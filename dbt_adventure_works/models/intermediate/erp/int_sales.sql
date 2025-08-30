@@ -56,7 +56,7 @@ with
                 else null
             end as unit_price_discount_percentage
             , round(sales_order_details.unit_price_discount * sales_order_details.unit_price * sales_order_details.order_qty, 3) as unit_price_discount_value
-            -- , cast(sales_order_details.line_total as numeric) as line_total
+            , sales_order_details.last_updated_at as source_last_updated_at
         from sales_order_details
         left join sales_order_headers
             on sales_order_details.sales_order_id = sales_order_headers.sales_order_id  

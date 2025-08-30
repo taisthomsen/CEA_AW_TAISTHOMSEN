@@ -6,8 +6,7 @@ with
 
     , generate_sk as (
         select
-            {{ dbt_utils.generate_surrogate_key(['address_id']) }} as address_sk
-            , address_id
+            address_id
             , city_name
             , state_province_name
             , country_region_name
@@ -19,7 +18,6 @@ with
             , spatial_location_address
             , source_last_updated_at
             , current_timestamp() as updated_at
-            , '{{ invocation_id }}' as dbt_run_id
         from int_locations
     )
 

@@ -14,7 +14,7 @@ with
     , transformed as (
         select
         -- Primary Key
-            person_id as salesperson_pk
+            person_id as salesperson_id
         -- Salesperson Information
             , concat(first_name, ' ', last_name) as salesperson_name
             , person_type as employee_type

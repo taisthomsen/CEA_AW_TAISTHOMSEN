@@ -7,14 +7,13 @@ with
 
     , generate_sk as (
         select
-            {{ dbt_utils.generate_surrogate_key(['sales_reason_id']) }} as sales_reason_sk
+            {{ dbt_utils.generate_surrogate_key(['sales_order_id','sales_reason_id']) }} as sales_reason_sk
             , sales_order_id
             , sales_reason_id
             , sales_reason_name
             , sales_reason_type
             , source_last_updated_at
             , current_timestamp() as updated_at
-            , '{{ invocation_id }}' as dbt_run_id
         from int_sales_reasons
     )
 

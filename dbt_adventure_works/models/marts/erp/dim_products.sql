@@ -6,8 +6,7 @@ with
 
     , generate_sk as (
         select
-            {{ dbt_utils.generate_surrogate_key(['product_id']) }} as product_sk
-            , product_id
+            product_id
             , product_name
             , product_category_id
             , product_category_name
@@ -24,7 +23,6 @@ with
             , product_color
             , last_updated_at as source_last_updated_at
             , current_timestamp() as updated_at
-            , '{{ invocation_id }}' as dbt_run_id
         from int_products
    )
 
