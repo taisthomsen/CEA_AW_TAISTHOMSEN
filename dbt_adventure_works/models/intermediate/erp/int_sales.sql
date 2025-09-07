@@ -21,7 +21,8 @@ with
                     then 'credit card'
                 else 'other payment method'
             end as payment_method
-            , sales_order_headers.shipping_address_id   
+            , sales_order_headers.credit_card_id
+            , sales_order_headers.address_id   
             , cast(sales_order_headers.order_date as date) as order_date
             , cast(sales_order_headers.due_date as date) as due_date
             , cast(sales_order_headers.ship_date as date) as ship_date
@@ -41,18 +42,18 @@ with
                 else 'Unknown'
             end as order_status
             , sales_order_headers.is_online_order
-            , cast(sales_order_headers.subtotal as numeric) as subtotal
-            , cast(sales_order_headers.tax_amount as numeric) as tax_amount
-            , cast(sales_order_headers.freight as numeric) as freight
-            , sales_order_headers.total_due     
+            , cast(sales_order_headers.subtotal as float) as subtotal
+            , cast(sales_order_headers.tax_amount as float) as tax_amount
+            , cast(sales_order_headers.freight as float) as freight
+            , cast(sales_order_headers.total_due as float) as total_due     
             , sales_order_details.sales_order_detail_id
             , sales_order_details.product_id
             , sales_order_details.special_offer_id
-            , sales_order_details.order_qty
-            , cast(sales_order_details.unit_price as numeric) as unit_price
+            , cast(sales_order_details.order_qty as integer) as order_qty
+            , cast(sales_order_details.unit_price as float) as unit_price
             , case
                 when sales_order_details.unit_price_discount != 0
-                    then sales_order_details.unit_price_discount
+                    then cast(sales_order_details.unit_price_discount as float)
                 else null
             end as unit_price_discount_percentage
             , round(sales_order_details.unit_price_discount * sales_order_details.unit_price * sales_order_details.order_qty, 3) as unit_price_discount_value

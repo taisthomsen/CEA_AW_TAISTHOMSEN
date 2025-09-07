@@ -5,7 +5,7 @@ with
         from {{ ref('int_salesreasons') }}
     )
 
-    , generate_sk as (
+    , transformed as (
         select
             {{ dbt_utils.generate_surrogate_key(['sales_order_id','sales_reason_id']) }} as sales_reason_sk
             , sales_order_id
@@ -18,4 +18,4 @@ with
     )
 
     select * 
-    from generate_sk
+    from transformed

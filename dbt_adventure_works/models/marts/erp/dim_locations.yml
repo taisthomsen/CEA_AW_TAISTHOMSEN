@@ -2,33 +2,40 @@ models:
   - name: dim_locations
     description: "Dimension table for locations. Contains address, city, state, and country information."
     columns:
-      - name: location_sk
-        description: "Surrogate key for the location."
-      - name: location_id
-        description: "Business key for the location."
-      - name: city
-        description: "City of the location."
-      - name: state_province
-        description: "State or province of the location."
-      - name: country_region
-        description: "Country or region of the location."
-      - name: state_province_code
-        description: "Code for the state or province."
-      - name: country_region_code
-        description: "Code for the country or region."
-      - name: postal_code
-        description: "Postal code for the location."
+      - name: address_id
+        description: "Primary key for the location."
+        tests:
+          - unique
+          - not_null
+      - name: city_name
+        description: "Name of the city of the location."
+      
+      - name: state_province_name
+        description: "Name of the state or province of the location."
+        
+      - name: state_province_id
+        description: "Unique ID for the state or province of the location."
+      
+      - name: country_region_name
+        description: "Name of the country or region of the location."
+        
+      - name: country_region_id
+        description: "Unique ID for the country or region of the location."
+       
       - name: address_line_1
-        description: "First line of the address."
+        description: "First line of the address of the location."
+       
       - name: address_line_2
-        description: "Second line of the address (optional)."
-      - name: spatial_location
-        description: "Spatial location data."
-      - name: rowguid
-        description: "Unique row identifier (GUID)."
-      - name: last_updated_at
-        description: "Timestamp when the record was last updated in the source."
+        description: "First line of the address of the location."
+      
+      - name: spatial_location_address
+        description: "Spatial location data of the location."
+
+      - name: source_last_updated_at
+        description: "Timestamp when the source was last updated."
+
       - name: updated_at
         description: "Timestamp when the record was last updated in the warehouse."
-      - name: dbt_run_id
-        description: "ID of the dbt run that last updated the record."
+
+     
+       

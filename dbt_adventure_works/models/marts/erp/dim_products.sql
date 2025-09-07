@@ -4,7 +4,7 @@ with
         from {{ ref('int_products') }}
     )
 
-    , generate_sk as (
+    , transformed as (
         select
             product_id
             , product_name
@@ -12,7 +12,6 @@ with
             , product_category_name
             , product_subcategory_id
             , product_subcategory_name
-            , product_line
             , product_line_name
             , product_model_id
             , is_active
@@ -27,4 +26,4 @@ with
    )
 
 select * 
-from generate_sk
+from transformed

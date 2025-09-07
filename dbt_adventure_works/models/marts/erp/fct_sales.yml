@@ -1,0 +1,109 @@
+models:
+
+    - name: fct_sales
+      description: "Fact table for sales. Contains sales transactions and related metadata."
+      columns:
+        - name: sales_sk
+          description: "Surrogate key for each sales transaction."
+          tests:
+            - unique
+            - not_null
+
+        - name: customer_id
+          description: "Foreing key referring to dim_customers."
+          tests:
+            - not_null
+            - relationships:
+                to: ref('dim_customers')
+                field: customer_id
+
+        - name: product_id
+          description: "Unique ID for the product."
+          tests:
+            - not_null
+            - relationships:
+                to: ref('dim_products')
+                field: product_id
+            
+        - name: address_id
+          description: "Unique ID for the address."
+          tests:
+            - not_null
+            - relationships:
+                to: ref('dim_locations')
+                field: address_id
+
+        - name: salesperson_id
+          description: "Unique ID for the salesperson."
+          tests:
+            - relationships:
+                to: ref('dim_salespersons')
+                field: salesperson_id
+
+        - name: credit_card_id
+          description: "Unique ID for the credit card."
+          tests:
+            - relationships:
+                to: ref('dim_creditcards')
+                field: credit_card_id
+
+        - name: sales_order_id
+          description: "Unique ID for the sales order."
+          tests:
+            - not_null
+            
+        - name: territory_id
+          description: "Unique ID for the territory."
+          tests:
+            - not_null
+
+        - name: payment_method
+          description: "Method of payment."
+
+        - name: order_date
+          description: "Date when the order was placed."
+
+        - name: due_date
+          description: "Date when the order is due."
+
+        - name: ship_date
+          description: "Date when the order was shipped."       
+
+        - name: order_status
+          description: "Status of the order."
+
+        - name: is_online_order
+          description: "Indicates if the order was placed online."
+
+        - name: subtotal
+          description: "Subtotal of the order."
+  
+        - name: tax_amount
+          description: "Tax amount of the order."
+
+        - name: freight
+          description: "Freight amount of the order." 
+
+        - name: total_due
+          description: "Total due amount of the order."
+
+        - name: order_qty
+          description: "Quantity of the order."
+
+        - name: unit_price
+          description: "Unit price of the product."
+
+        - name: unit_price_discount_percentage
+          description: "Discount percentage of the unit price."
+
+        - name: unit_price_discount_value
+          description: "Discount value of the unit price."
+
+        - name: source_last_updated_at
+          description: "Timestamp when the record was last updated in the source."
+         
+        - name: updated_at
+          description: "Timestamp when the record was last updated in the warehouse."
+
+
+         

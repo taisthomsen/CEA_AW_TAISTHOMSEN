@@ -17,6 +17,15 @@ sources:
           - name: persontype
             description: "Type of person. Values: EM = Employee, SP = Sales Person, SC = Store Contact, VC = Vendor Contact, IN = Individual (customer), GC = General Contact."
             tests:
+              - not_null
+
+      - name: payments
+        identifier: sales_creditcard
+        description: "Payment methods information"
+        columns:
+          - name: creditcardid
+            description: "Primary key for credit card"
+            tests:
               - unique
               - not_null
 

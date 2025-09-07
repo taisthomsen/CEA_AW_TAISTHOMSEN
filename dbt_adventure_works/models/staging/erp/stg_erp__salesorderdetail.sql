@@ -15,8 +15,8 @@ with
             ,cast(specialofferid as string) as special_offer_id
             -- Order Line Information
             ,cast(orderqty as integer) as order_qty
-            ,cast(unitprice as numeric) as unit_price
-            ,cast(unitpricediscount as numeric) as unit_price_discount
+            ,cast(unitprice as float) as unit_price
+            ,cast(unitpricediscount as float) as unit_price_discount
             -- System columns
             ,cast(rowguid as string) as rowguid
             ,cast(modifieddate as date) as last_updated_at

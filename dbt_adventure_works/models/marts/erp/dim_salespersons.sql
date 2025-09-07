@@ -5,7 +5,7 @@ with
         from {{ ref('int_salespersons') }}
     )
 
-    , generate_sk as (
+    , transformed as (
         select
             salesperson_id
             , salesperson_name
@@ -19,4 +19,4 @@ with
     )
 
 select * 
-from generate_sk
+from transformed

@@ -2,19 +2,29 @@ models:
   - name: dim_customers
     description: "Dimension table for customers. Contains customer details and metadata."
     columns:
-      - name: customer_sk
-        description: "Surrogate key for the customer."
       - name: customer_id
-        description: "Business key for the customer."
+        description: "Primary key for the customer."
+        tests:
+          - unique
+          - not_null
       - name: customer_name
         description: "Full name of the customer or store."
+       
       - name: customer_type
         description: "Type/category of the customer (retail or reseller)."
+        tests:
+          - accepted_values:
+              values: ["retail", "reseller"]
+
       - name: customer_email_approval
         description: "Email approval status for the customer."
+     
       - name: source_last_updated_at
-        description: "Timestamp when the record was last updated in the source."
+        description: "Timestamp when the source was last updated."
+
       - name: updated_at
         description: "Timestamp when the record was last updated in the warehouse."
-      - name: dbt_run_id
-        description: "ID of the dbt run that last updated the record."
+
+     
+
+    

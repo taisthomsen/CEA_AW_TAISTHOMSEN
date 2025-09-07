@@ -4,7 +4,7 @@ with
         select * 
         from {{ ref('int_customers') }}
     )
-    , generate_sk as (
+    , transformed as (
       select
            customer_id
           , customer_name
@@ -16,4 +16,4 @@ with
     )
 
     select * 
-    from generate_sk
+    from transformed

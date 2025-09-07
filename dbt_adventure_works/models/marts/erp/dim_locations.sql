@@ -4,7 +4,7 @@ with
         from {{ ref('int_locations') }}
     )
 
-    , generate_sk as (
+    , transformed as (
         select
             address_id
             , city_name
@@ -22,4 +22,4 @@ with
     )
 
     select * 
-    from generate_sk
+    from transformed

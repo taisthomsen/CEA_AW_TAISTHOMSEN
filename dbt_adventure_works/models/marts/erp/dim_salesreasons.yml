@@ -3,18 +3,28 @@ models:
     description: "Dimension table for sales reasons. Contains reasons and types for sales transactions."
     columns:
       - name: sales_reason_sk
-        description: "Surrogate key for the sales reason."
+        description: "Primary key for the sales reason."
+        tests:
+          - unique
+          - not_null
       - name: sales_order_id
         description: "Order ID associated with the sales reason."
+       
       - name: sales_reason_id
         description: "Business key for the sales reason."
+       
       - name: sales_reason_name
         description: "Name of the sales reason."
+       
       - name: sales_reason_type
         description: "Type/category of the sales reason."
+
       - name: source_last_updated_at
-        description: "Timestamp when the record was last updated in the source."
+        description: "Timestamp when the source was last updated."
+
       - name: updated_at
         description: "Timestamp when the record was last updated in the warehouse."
-      - name: dbt_run_id
-        description: "ID of the dbt run that last updated the record."
+
+     
+        
+    
