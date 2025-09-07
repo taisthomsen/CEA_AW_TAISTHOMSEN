@@ -1,0 +1,27 @@
+adventure_works:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: 'ejb52940.us-east-1'
+      user: "{{ env_var('DBT_SF_USER') }}"
+      password: "{{ env_var('DBT_SF_PASSWORD') }}"
+      role: FEA_STUDENT
+      database: FEA25_05
+      warehouse: ACADEMY_WAREHOUSE
+      schema: dbt_ceaaw_tt
+      threads: 4
+      client_session_keep_alive: False
+      query_tag: tais_thomsen_dev
+    prod:
+      type: snowflake
+      account: 'ejb52940.us-east-1'
+      user: "{{ env_var('DBT_SF_USER') }}"
+      password: "{{ env_var('DBT_SF_PASSWORD') }}"
+      role: FEA_STUDENT
+      database: FEA25_05
+      warehouse: ACADEMY_WAREHOUSE
+      schema: dbt_ceaaw_tt
+      threads: 8
+      client_session_keep_alive: False
+      query_tag: adventure_works_dbt_prod
