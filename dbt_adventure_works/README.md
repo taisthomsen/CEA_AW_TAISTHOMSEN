@@ -97,7 +97,10 @@ dbt build
 
 # Run tests
 dbt test
+```
 
+To check out project documentation such as model descriptions and dependencies (lineage graph), generate the documentation and start the server using:
+```bash
 # Generate documentation
 dbt docs generate
 dbt docs serve
